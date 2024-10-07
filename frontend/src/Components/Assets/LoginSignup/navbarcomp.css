@@ -1,0 +1,23 @@
+
+.custom-navbar {
+    background-color: orange; 
+    padding: 1rem;
+    margin-top: -100px; 
+}
+
+.custom-navbar .nav-link {
+    color: #000000; 
+}
+
+.custom-navbar .nav-link.active {
+    font-weight: bold; 
+    text-decoration: underline;
+    color: red;
+}
+
+.custom-navbar .navbar-brand {
+    font-size: 2.5rem; 
+    color: #000000;
+    width: 300p; 
+    font-weight: bolder;
+}
