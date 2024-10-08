@@ -4,7 +4,7 @@ const jwt=require('jsonwebtoken');
 const cookieParser=require('cookie-parser');
 const cors = require('cors');
 const sequelize = require('./util/database')
-const User=require('./models/user');
+const User=require('./models/User');
 require('dotenv').config();
 
 
@@ -21,7 +21,7 @@ app.use(cookieParser());
 sequelize.authenticate()
     .then(() => {
         console.log('Connection to the database has been established successfully.');
-        return sequelize.sync(); // Sync all models
+        return sequelize.sync();
     })
     .then(() => {
         app.listen(8081, () => {
@@ -49,41 +49,41 @@ app.get('/', (req, res) => {
         });
     });
 
-app.post('/signup',async(req,res)=>{
-    try {
-        const { username, password, email } = req.body;
-        if (!(username && email && password)) {
-            return res.status(400).json({ error: 'All Fields Are Compulsory' });
+app.post('/signup', async (req, res) => {
+        try {
+            const { username, password, email } = req.body;
+
+            if (!(username && email && password)) {
+                return res.status(400).json({ error: 'All fields are compulsory' });
+            }
+            const existingUser = await User.findOne({ where: { email } });
+            if (existingUser) {
+                return res.status(400).json({ error: 'User already exists' });
+            }
+            const rounds = 10;
+            const hashedPassword = await bcrypt.hash(password, rounds);
+            const newUser = User.create({ username,password: hashedPassword, email });
+
+            const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
+            const token = jwt.sign({ UserID: newUser.id }, JWT_SECRET, { expiresIn: '1h' });
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: false, 
+                maxAge: 3600000,
+                sameSite: 'strict',
+            });
+    
+            return res.status(201).json({
+                message: 'User created successfully',
+                userID: newUser.id,
+            });
+        } catch (error) {
+            console.error(error);
+            const errorMessage = error.errors ? error.errors[0].message : 'Something went wrong, please try again later';
+            return res.status(400).json({ error: errorMessage });
         }
-
-        const existingUser = await User.findOne({ where: { email } });
-        if (existingUser) {
-            return res.status(400).json({ error: 'User already exist' });
-        }
-
-        const rounds = 10;
-        const hashedpass = await bcrypt.hash(password, rounds);
-
-        const newUser = await User.create({ username, password: hashedpass, email });
-        const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
-        const token = jwt.sign({ UserID: newUser.id }, JWT_SECRET, { expiresIn: '1h' });
-
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: false,
-            maxAge: 3600000,
-            sameSite: 'strict',
-        });
-
-        return res.status(201).json({
-            message: 'User Created Successfully',
-            userID: newUser.id,
-        });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Something went wrong, Please try again later' });
-    }
-});
+    });
+    
 
 app.post('/login',async(req,res)=>{
     const {email,password}=req.body;

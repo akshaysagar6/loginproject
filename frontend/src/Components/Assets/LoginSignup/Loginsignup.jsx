@@ -5,6 +5,7 @@ import email_icon from '../../Assets/email.png';
 import password_icon from '../../Assets/password.png';
 import { Link, useNavigate  } from 'react-router-dom';
 import axios from 'axios';
+import sign_icon from '../../Assets/wired2.gif'
 
 
 const Loginsignup = () => {
@@ -46,7 +47,10 @@ const Loginsignup = () => {
   return (
     <div className="container">
       <div className="header">
-        <div className="text">Sign Up</div>
+        <div className="text">
+        <img src={sign_icon}
+    alt="My App Logo" 
+    style={{ width:'70px', height: '70px',color:'red',marginTop:'-10px',marginRight:'10px'}}/>Sign Up</div>
         <div className="underline"></div>
       </div>
       <form onSubmit={handleSubmit}>

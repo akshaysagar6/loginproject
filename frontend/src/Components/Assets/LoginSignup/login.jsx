@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./login.css"; 
+import pass_icon from '../../Assets/password.gif'
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -29,9 +30,15 @@ const Login = () => {
   };
 
   return (
+    
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Login</h2>
+        <h2>
+        <img 
+    src={pass_icon}
+    alt="My App Logo" 
+    style={{ width:'70px', height: '70px',color:'red',marginTop:'-10px',marginRight:'10px'}} // Adjust height as needed
+/>Login</h2>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input

@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../util/database');
 
-const User=sequelize.define('User',{
+const User=sequelize.define('User',{    
     username:{
         type:DataTypes.STRING,
         allowNull:false,
@@ -9,7 +9,7 @@ const User=sequelize.define('User',{
         validate:{
             notEmpty:true,
             len:{
-                args:[5,20],
+                args:[5,200],
                 msg:'Username must be between 5 and 20 characters'
             }
         }
@@ -27,12 +27,8 @@ const User=sequelize.define('User',{
     password:{
         type:DataTypes.STRING,
         allowNull:false,
-        validator:{
-            notEmpty:true,
-            len:{
-                args:[6,20],
-                msg:'password must be of length atleast 6 characters'
-            }
+        validate:{
+            notEmpty:true
         }
     }
     

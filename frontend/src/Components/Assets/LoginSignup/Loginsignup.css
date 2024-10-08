@@ -1,14 +1,18 @@
 /* Container and general form styling */
+* {
+  box-sizing: border-box;
+}
+
 .container {
-    width: 500px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     margin: auto;
     margin-top: 50px;
-    background: rgb(243, 243, 243);
-    padding: 30px;
+    background: rgb(255, 255, 255);
+    padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 4px 123px rgba(0, 0, 0, 0.1);
   }
   
   .header {
@@ -28,10 +32,17 @@
   }
   
   .underline {
-    width: 61px;
-    height: 5px;
+    width: 66px;
+    height: 4px;
     background-color: black;
     border-radius: 5px;
+    margin-left: 70px ;
+    margin-top: -10px;
+  }
+  .underline:hover{
+    background-color: orange;
+    
+    
   }
   
 
@@ -40,14 +51,17 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    align-items: center;
+    justify-content: center;
   }
   
   .input {
     display: flex;
     align-items: center;
-    width: 100%;
+    justify-content: center;
+    width: 50%;
     height: 60px;
-    background: white;
+    background: rgb(236, 233, 233);
     border-radius: 6px;
     padding: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -59,7 +73,7 @@
   
   .input input {
     width: 100%;
-    height: 40px;
+    height: 50px;
     border: none;
     outline: none;
     font-size: 16px;
