@@ -1,6 +1,6 @@
 import React from 'react';
 import NavbarComponent from './navbarcomp';
-import { Button } from 'react-bootstrap'; // Import Button from Bootstrap
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './home.css'
 
@@ -8,17 +8,17 @@ function Home1() {
     return (
         <div>
             <NavbarComponent />
-            <div className="container mt-5 text-center"> {/* Center align the content */}
+            <div className="container mt-5 text-center"> 
                 <h1>Welcome to My App</h1>
+                <h4>To continue</h4>
                 <div className="mt-4">
-                    {/* Add buttons for login and signup */}
                     <Link to="/login">
-                        <Button variant="primary" size="sm" className="me-3"> {/* Reduced size */}
+                        <Button variant="primary" size="sm" className="me-3"> 
                             Login
                         </Button>
                     </Link>
                     <Link to="/signup">
-                        <Button variant="success" size="sm" className="me-3"> {/* Reduced size */}
+                        <Button variant="success" size="sm" className="me-3"> 
                             Signup
                         </Button>
                     </Link>

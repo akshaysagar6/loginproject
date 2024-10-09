@@ -4,6 +4,8 @@ import { Link,useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./login.css"; 
 import pass_icon from '../../Assets/password.gif'
+import email_icon from '../../Assets/email.png';
+import password_icon from '../../Assets/password.png';
 
 const Login = () => {
   const [email, setEmail] = useState("");

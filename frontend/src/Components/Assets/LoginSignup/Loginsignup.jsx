@@ -14,6 +14,7 @@ const Loginsignup = () => {
     email: '',
     password: '',
   });
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,9 +23,19 @@ const Loginsignup = () => {
       [name]: value,
     });
   };
+
+  const validatePassword = (pwd) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(pwd);
+  };
+
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!validatePassword(formData.password)) {
+      setError('Password must be at least 8 characters long and include uppercase, lowercase, numbers, and special characters.');
+      return;
+    }
     axios.post('http://localhost:8081/signup',formData)
     .then((res) => {
       console.log('Response:', res);
@@ -40,7 +51,6 @@ const Loginsignup = () => {
   };
 
   const handleLoginRedirect = () => {
-    
     console.log('Redirecting to login page...');
   };
 
@@ -87,6 +97,10 @@ const Loginsignup = () => {
               placeholder="Password"
               required
             />
+            <div style={{display:'flex',flexDirection: 'column',alignItems:'center',marginTop:'20px',gap:'20px',width:'300%'}}>
+              {error && <p style={{ color: 'red'}}>{error}</p>}
+              </div>
+            
           </div>
         </div>
         <div className="submit-container">
