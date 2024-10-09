@@ -15,13 +15,17 @@ This project is a simple login page built using Node.js, Express, React, and SQL
 - **React**: Frontend library for building user interfaces.
 - **SQLite**: Lightweight database for storing user credentials.
 - **Sequelize**: Promise-based ORM for Node.js to interact with SQLite.
+- JWT for user Authentication 
+  
+## Features 
 
 - User registration
-- User login
+- User login/logout
+- User authentication 
 - Error handling for invalid credentials
 - Responsive design with basic styling
 
-## API
+## API Endpoints
 
 POST /api/register
 Registers a new user.
